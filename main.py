@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+#python3.6
 from decimal import Decimal
 import domain
 import domain_util as util
