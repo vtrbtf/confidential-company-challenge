@@ -19,4 +19,4 @@ def gmaps_parameters(truck, cargo):
     return urllib.parse.urlencode({'api': 1, 'travelmode': 'driving',
                                    'origin': f'{truck.city}, {truck.state}',
                                    'destination': f'{cargo.destination_city}, {cargo.destination_state}',
-                                   'waypoints': f'{cargo.origin_city},{cargo.origin_state}'})
+                                   'waypoints': f'{cargo.origin_city}, {cargo.origin_state}'})

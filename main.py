@@ -50,22 +50,26 @@ def select_best_cargo_and_truck_permutation(index, cargos):
     return (best_cargo_order, best_truck_set)
 
 
-cargos = util.parse_csv("./data/cargo.csv", lambda row: domain.Cargo(row))
-trucks = util.parse_csv("./data/trucks.csv", lambda row: domain.Truck(row))
-(best_cargo_order, best_truck_set) = select_best_cargo_and_truck_permutation(create_cargo_truck_distance_index(cargos, trucks), cargos)
 
-for cargo_index in best_cargo_order:
-    selected_cargo = cargos[cargo_index]
-    selected_truck = trucks[best_truck_set[cargo_index][0]]
-    url_parameters = util.gmaps_parameters(selected_truck, selected_cargo)
 
-    print(f'- Cargo {selected_cargo.product} will be picked up by Truck {selected_truck.truck}')
-    print(f'-- Route: https://www.google.com/maps/dir/?{url_parameters}')
-    print(f'---       Truck will be leaving {selected_truck.city},{selected_truck.state}, ')
-    print(f'---       picking up the cargo at {selected_cargo.origin_city},{selected_cargo.origin_state} and ')
-    print(f'---       delivering it at {selected_cargo.destination_city},{selected_cargo.destination_state}')
 
-    if cargo_index != best_cargo_order[len(best_cargo_order) - 1]:
-        print('=' * 64)
-        print(' ')
+if __name__ == '__main__':
+    cargos = util.parse_csv("./data/cargo.csv", lambda row: domain.Cargo(row))
+    trucks = util.parse_csv("./data/trucks.csv", lambda row: domain.Truck(row))
+    (best_cargo_order, best_truck_set) = select_best_cargo_and_truck_permutation(create_cargo_truck_distance_index(cargos, trucks), cargos)
+
+    for cargo_index in best_cargo_order:
+        selected_cargo = cargos[cargo_index]
+        selected_truck = trucks[best_truck_set[cargo_index][0]]
+        url_parameters = util.gmaps_parameters(selected_truck, selected_cargo)
+
+        print(f'- Cargo {selected_cargo.product} will be picked up by Truck {selected_truck.truck}')
+        print(f'-- Route: https://www.google.com/maps/dir/?{url_parameters}')
+        print(f'---       Truck will be leaving {selected_truck.city},{selected_truck.state}, ')
+        print(f'---       picking up the cargo at {selected_cargo.origin_city},{selected_cargo.origin_state} and ')
+        print(f'---       delivering it at {selected_cargo.destination_city},{selected_cargo.destination_state}')
+
+        if cargo_index != best_cargo_order[len(best_cargo_order) - 1]:
+            print('=' * 64)
+            print(' ')
 
