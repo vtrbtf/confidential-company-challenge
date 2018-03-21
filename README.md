@@ -1,4 +1,4 @@
-# Loadsmart Backend Challenge
+# Backend Challenge
 
 ## Problem
 Given cargos and trucks, find the optimal mapping to reduce distance, considering that is not possible to reuse trucks.
